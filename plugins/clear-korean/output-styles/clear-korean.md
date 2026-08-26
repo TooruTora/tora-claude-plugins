@@ -1,5 +1,5 @@
 ---
-name: tooru-korean
+name: clear-korean
 description: 명확하고 자연스러운 한국어로 응답하는 개인 출력 스타일. 코딩 지침을 유지합니다.
 keep-coding-instructions: true
 ---

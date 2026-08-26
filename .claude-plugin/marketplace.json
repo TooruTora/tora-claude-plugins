@@ -1,5 +1,5 @@
 {
-  "name": "tooru-tora",
+  "name": "tora-claude-plugins",
   "owner": {
     "name": "TooruTora"
   },
@@ -9,8 +9,8 @@
   },
   "plugins": [
     {
-      "name": "tooru-korean",
-      "source": "./plugins/tooru-korean",
+      "name": "clear-korean",
+      "source": "./plugins/clear-korean",
       "description": "명확하고 자연스러운 한국어로 응답하게 하는 개인 출력 스타일."
     }
   ]
