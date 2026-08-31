@@ -12,6 +12,15 @@ Claude Code가 명확하고 자연스러운 한국어로 응답하게 하는 out
 - 문장 성분과 조사를 생략하지 않은 완결된 문장을 쓰게 합니다.
 - 거슬리는 표현을 발견할 때마다 본문의 「피해야 할 표현 목록」에 `[나쁜 예 → 좋은 예]` 형식으로 추가하며 다듬는 것을 전제로 합니다.
 
+### gdd-studio
+
+AI 에이전트로 구성된 게임 기획팀입니다. 게임 컨셉 정의부터 시스템 GDD 작성, 내러티브·레벨 기획까지 GDD 전 과정을 다룹니다.
+
+- 에이전트 6종: 크리에이티브 디렉터, 게임 디자이너, 내러티브 디렉터, 시스템 디자이너, 레벨 디자이너, 시나리오 라이터.
+- 커맨드 7종: `/gdd-concept`, `/gdd-design`, `/gdd-quick`, `/gdd-review`, `/gdd-review-all`, `/gdd-html`, `/gdd-checkpoint`.
+- 훅이 세션 시작·작업 시작·종료 시점에 `production/session-state/active.md`를 읽고 갱신해 진행 상황을 이어줍니다.
+- 산출물은 작업 중인 프로젝트의 `design/` 아래에 쌓입니다.
+
 ## 설치
 
 Claude Code 프롬프트에서 실행합니다.
@@ -20,6 +29,10 @@ Claude Code 프롬프트에서 실행합니다.
 /plugin marketplace add TooruTora/tora-claude-plugins
 /plugin install clear-korean@tora-claude-plugins
 /output-style        ← clear-korean 선택
+```
+
+```
+/plugin install gdd-studio@tora-claude-plugins
 ```
 
 ## 수정 반영

@@ -1,0 +1,26 @@
+# 크로스시스템 엔티티 레지스트리
+# 여러 GDD에서 참조하는 공유 값과 엔티티를 등록합니다.
+# systems-designer가 새 크로스시스템 엔티티를 도입할 때 여기에 추가합니다.
+
+# 사용법:
+#   새 GDD 작성 전 이 파일을 읽어 기존 정의와 일관성을 유지하세요.
+#   새로운 크로스시스템 사실을 도입하면 세션 끝에 이 파일 업데이트를 제안하세요.
+
+# 예시 구조 (게임에 맞게 수정하세요):
+#
+# player:
+#   base_health: 100
+#   base_speed: 5.0
+#   base_damage: 10
+#
+# combat:
+#   min_damage: 1
+#   max_level: 50
+#   crit_multiplier: 2.0
+#
+# economy:
+#   starting_gold: 100
+#   max_inventory_slots: 30
+
+# 등록된 엔티티 없음 — 게임 컨셉을 확정한 후 추가하세요.
+entities: {}

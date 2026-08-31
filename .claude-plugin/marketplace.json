@@ -12,6 +12,12 @@
       "name": "clear-korean",
       "source": "./plugins/clear-korean",
       "description": "명확하고 자연스러운 한국어로 응답하게 하는 개인 출력 스타일."
+    },
+    {
+      "name": "gdd-studio",
+      "source": "./plugins/gdd-studio",
+      "description": "AI 에이전트로 구성된 게임 기획팀. 게임 컨셉, 시스템 GDD, 내러티브·레벨 기획 전 과정을 지원합니다.",
+      "category": "productivity"
     }
   ]
 }

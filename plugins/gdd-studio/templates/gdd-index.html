@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+  :root{--bg:#ffffff;--fg:#1a1a2e;--muted:#6b7280;--accent:#4f46e5;--border:#e5e7eb;
+        --sidebar:#f8f9fc;--code-bg:#f3f4f6;}
+  [data-theme="dark"]{--bg:#0f1117;--fg:#e4e6eb;--muted:#9aa0ac;--accent:#8b95ff;
+        --border:#272b36;--sidebar:#151823;--code-bg:#1e222e;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"Segoe UI","Malgun Gothic",system-ui,sans-serif;
+       background:var(--bg);color:var(--fg);line-height:1.6;}
+  .wrap{max-width:880px;margin:0 auto;padding:2.2rem 1.4rem 5rem;}
+  header{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap;margin-bottom:.4rem;}
+  h1{font-size:1.7rem;margin:0;border-bottom:3px solid var(--accent);padding-bottom:.35rem;flex:1;}
+  .total{font-size:.85rem;color:var(--muted);white-space:nowrap;}
+  .toggle{cursor:pointer;border:1px solid var(--border);background:var(--bg);
+          color:var(--fg);border-radius:8px;padding:.35rem .65rem;font-size:.85rem;}
+  .search{width:100%;padding:.6rem .8rem;border:1px solid var(--border);border-radius:8px;
+          background:var(--sidebar);color:var(--fg);margin:1.1rem 0 .2rem;font-size:.95rem;}
+  .empty{color:var(--muted);font-size:.9rem;margin:.6rem .2rem;display:none;}
+  .grp{margin-top:1.8rem;}
+  .grp-title{font-size:1.15rem;margin:0 0 .7rem;display:flex;align-items:center;gap:.5rem;}
+  .grp-count{font-size:.75rem;font-weight:600;color:var(--accent);
+             background:color-mix(in srgb,var(--accent) 12%,transparent);
+             border-radius:99px;padding:.1rem .55rem;}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem;}
+  .card{display:block;border:1px solid var(--border);border-radius:10px;padding:.8rem .95rem;
+        background:var(--sidebar);text-decoration:none;color:var(--fg);
+        transition:border-color .12s, transform .12s;}
+  .card:hover{border-color:var(--accent);transform:translateY(-1px);}
+  .card-title{font-weight:600;font-size:.95rem;line-height:1.4;}
+  .card-src{font-size:.74rem;color:var(--muted);margin-top:.3rem;
+            font-family:"Cascadia Code",Consolas,monospace;word-break:break-all;}
+  footer{margin-top:3rem;font-size:.75rem;color:var(--muted);text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>{{TITLE}}</h1>
+    <span class="total" id="total"></span>
+    <button class="toggle" id="theme">🌙 다크</button>
+  </header>
+  <input class="search" id="search" placeholder="🔍 문서 제목·경로 검색…" autocomplete="off">
+  <div class="empty" id="empty">일치하는 문서가 없습니다.</div>
+  <div id="groups">
+{{SECTIONS}}
+  </div>
+  <footer>gdd-studio · 이 페이지는 문서가 추가·수정될 때마다 자동 재생성됩니다</footer>
+</div>
+<script>
+(function(){
+  // 1) 그룹별·전체 문서 수 자동 집계
+  const groups=[...document.querySelectorAll('.grp')];
+  let total=0;
+  groups.forEach(g=>{
+    const n=g.querySelectorAll('.card').length;total+=n;
+    const c=g.querySelector('.grp-count');if(c)c.textContent=n;
+  });
+  document.getElementById('total').textContent='문서 '+total+'개';
+
+  // 2) 필터 — 제목·경로 매칭, 빈 그룹 숨김
+  const search=document.getElementById('search');
+  const empty=document.getElementById('empty');
+  search.addEventListener('input',()=>{
+    const q=search.value.trim().toLowerCase();
+    let hit=0;
+    groups.forEach(g=>{
+      let gh=0;
+      g.querySelectorAll('.card').forEach(card=>{
+        const m=!q||card.textContent.toLowerCase().includes(q);
+        card.style.display=m?'':'none';if(m)gh++;
+      });
+      g.style.display=gh?'':'none';hit+=gh;
+    });
+    empty.style.display=hit?'none':'block';
+  });
+
+  // 3) 다크모드 토글 — 문서 뷰어와 같은 키를 공유해 테마 일관 유지
+  const theme=document.getElementById('theme');
+  const root=document.documentElement;
+  function setTheme(t){root.setAttribute('data-theme',t);theme.textContent=t==='dark'?'☀️ 라이트':'🌙 다크';
+    try{localStorage.setItem('gdd-theme',t);}catch(e){}}
+  try{const saved=localStorage.getItem('gdd-theme');if(saved)setTheme(saved);}catch(e){}
+  theme.addEventListener('click',()=>setTheme(root.getAttribute('data-theme')==='dark'?'light':'dark'));
+})();
+</script>
+</body>
+</html>
