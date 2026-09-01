@@ -48,3 +48,6 @@ Claude Code 프롬프트에서 실행합니다.
 1. `plugins/<이름>/` 폴더를 만들고 `.claude-plugin/plugin.json`을 작성합니다.
 2. 용도에 맞는 폴더(`output-styles/`, `commands/`, `skills/`, `agents/` 등)에 내용을 넣습니다.
 3. `.claude-plugin/marketplace.json`의 `plugins` 배열에 항목을 추가합니다.
+4. 루트 `README.md`의 「플러그인 목록」에 설명을 추가합니다.
+
+플러그인 폴더에는 `CLAUDE.md`를 두지 않습니다(`.gitignore`로 막아둠). 이 레포에서 해당 폴더를 작업할 때 프로젝트 지침으로 딸려 들어오기 때문입니다. 플러그인 설명은 각 폴더의 `README.md`에 씁니다.
